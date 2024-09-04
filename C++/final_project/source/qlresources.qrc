@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>resources/images/background.png</file>
+        <file>resources/images/background1.jpg</file>
+        <file>resources/images/background2.jpg</file>
+        <file>resources/images/background3.jpg</file>
+        <file>resources/images/background4.jpg</file>
+        <file>resources/images/background5.jpg</file>
+        <file>resources/images/boss.png</file>
+        <file>resources/images/common.png</file>
+        <file>resources/images/title1.jpg</file>
+        <file>resources/images/title2.jpg</file>
+        <file>resources/images/tree2.jpg</file>
+        <file>resources/images/tree4.jpg</file>
+        <file>resources/images/tree13.jpg</file>
+        <file>resources/images/tree0.jpg</file>
+        <file>resources/images/rank.png</file>
+        <file>resources/images/background6.jpg</file>
+        <file>resources/images/boss1.png</file>
+        <file>resources/images/background7.jpg</file>
+    </qresource>
+    <qresource prefix="/maps">
+        <file>resources/maps/round1.txt</file>
+        <file>resources/maps/round2.txt</file>
+        <file>resources/maps/round3.txt</file>
+        <file>resources/maps/round4.txt</file>
+        <file>resources/maps/round5.txt</file>
+    </qresource>
+</RCC>
