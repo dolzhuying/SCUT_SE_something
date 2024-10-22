@@ -8,7 +8,7 @@ private:
     int capacity;  // 队列容量
 
 public:
-    CircularQueue(int size) : capacity(size+1), front(0), rear(-1) {//预留多1个位置作为判断队满的标志位
+    CircularQueue(int size) : capacity(size+1), front(0), rear(-1) {//capacity预留多1个位置作为判断队满的标志位
         arr = new int[capacity];
     }
 
