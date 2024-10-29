@@ -1,6 +1,6 @@
 ## 树
 
-![image-20241008165408028](C:\Users\LSJ\AppData\Roaming\Typora\typora-user-images\image-20241008165408028.png)
+![image-20241029163911584](assets/image-20241029163911584.png)
 
 * **性质**
 
