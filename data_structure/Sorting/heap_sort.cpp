@@ -8,7 +8,7 @@ void adjustdown(std::vector<int>&arr,int n,int root){
         if(child+1<n&&arr[child+1]>arr[child]){
             child++;
         }
-        if(arr[parent]<arr[child])break;
+        if(arr[parent]>arr[child])break;
         std::swap(arr[parent],arr[child]);
         parent=child;
         child=child*2+1;
