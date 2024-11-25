@@ -35,6 +35,10 @@ treenode* findmin(treenode*&root){
     if(!root)return nullptr;
     while(root->left)root=root->left;
     return root;
+    /*
+    if(!root->left)return root;
+    return findMin(root->left);
+    */
 }
 treenode* findmax(treenode*&root){
     if(!root)return nullptr;
@@ -70,6 +74,22 @@ treenode*deletenode(treenode*&root,int data){ //删除key节点
     }
     return root;
 }
+
+/*(void remove(treenode*&root,int data){
+    if(!root)return;
+    if(data<root->data)remove(root->left,data);
+    else if(data>root->data)remove(root->right,data);
+    else if(root->left&&root->right){
+        root->data=findmin(root->right)->data;
+        remove(root->right,root->data);
+    }
+    else{
+        treenode*node=root;
+        root=root->left==nullptr?root->right:root->left;
+        delete node;
+        node=nullptr;
+    }
+}*/
 
 void preorder(treenode*&root){ //前序
     if(!root)return;
