@@ -1,5 +1,4 @@
 #include<bits/stdc++.h>
-
 void bucketSort(std::vector<int>&nums){
     int n=nums.size();
     int mn = nums[0], mx = nums[0];
@@ -15,7 +14,7 @@ void bucketSort(std::vector<int>&nums){
             buckets[idx].push_back(nums[i]);
         }
         for (int i = 0; i < cnt; i++) {
-            sort(buckets[i].begin(), buckets[i].end());
+            sort(buckets[i].begin(), buckets[i].end());//筒内的排序算法不同
         }
         int index = 0;
         for (int i = 0; i < cnt; i++) {

@@ -1,162 +1,150 @@
-#include<iostream>
+
+#include <iostream>
 using namespace std;
 
-struct node
-{
-	int data;
-	node* next;
-	node* pre;
+struct Node {
+    int data;
+    Node* next;
+    Node* prev;
 };
 
-void pushfront(node* &phead)
-{
-	int x; cin >> x;
-	node* newnode = new node;
-	newnode->data = x;
-	phead->pre = newnode;
-	newnode->next = phead;
-	phead=newnode;
-	phead->pre = NULL;
-}
-node* tail = new node;
-void pushback(node* phead)
-{
-	int x; cin >> x;
-	node* p = phead;
-	node* newnode = new node;
-	newnode->data = x;
-	newnode->next = NULL;
-	newnode->pre = tail;
-	tail->next = newnode;
-	tail = newnode;
+void pushFront(Node*& head) {
+    int x; cin >> x;
+    Node* newNode = new Node{ x, head, nullptr };
+    if (head) {
+        head->prev = newNode;
+    }
+    head = newNode;
 }
 
-node* findnode(node* phead, int x)
-{
-	node* p = new node;
-	p = phead;
-	if (p->data == x)return p;
-	while (p->data != x)
-	{
-		p = p->next;
-		if (p->data == x)return p;
-	}
-	return NULL;
+void pushBack(Node*& head) {
+    int x; cin >> x;
+    Node* newNode = new Node{ x, nullptr, nullptr };
+    if (!head) {
+        head = newNode;
+    } else {
+        Node* p = head;
+        while (p->next) {
+            p = p->next;
+        }
+        p->next = newNode;
+        newNode->prev = p;
+    }
 }
 
-void insertnodeback(node*phead,int x)
-{
-	
-	int cur = 1;
-	while (cur != x)
-	{
-		cur++;
-		phead = phead->next;
-	}
-	node* newnode = new node;
-	int y; cin >> y;
-	newnode->data = y;
-	newnode->next = phead->next;
-	phead->next->pre = newnode;
-	newnode->pre = phead;
-	phead->next = newnode;
+Node* findNode(Node* head, int x) {
+    Node* p = head;
+    while (p && p->data != x) {
+        p = p->next;
+    }
+    return p;
 }
 
-
-node* findnode1(node* phead, int x)
-{
-	int cur = 1;
-	node* p = phead;
-	if (x == 1)
-	{
-		return phead;
-	}
-	while (cur != x)
-	{
-		cur++;
-		p = p->next;
-		if (cur == x)
-		{
-			return p;
-		}
-		else if (p->next == NULL)
-		{
-			cout << "not exist";
-			return NULL;
-		};
-	}
-}
-void erasenode(node* &head,int x)
-{
-	int cur = 1;
-	if (x == 1)
-	{
-		head = head->next;
-		return;
-	}
-	node* p = head;
-	while (cur != x - 1)
-	{
-		cur++;
-		p = p->next;
-		if (cur == x - 1)
-		{
-			
-			p->next->next->pre = p;
-			p->next = p->next->next;
-			
-			return;
-		}
-		else if (p->next == NULL)
-		{
-			cout << "not exist";
-			return;
-		}
-	}
-	
+void insertNodeBack(Node* head, int position, int value) {
+    if (!head || position <= 0) return;
+    Node* p = head;
+    for (int i = 1; i < position && p; ++i) {
+        p = p->next;
+    }
+    if (p) {
+        Node* newNode = new Node{ value, p->next, p };
+        if (p->next) {
+            p->next->prev = newNode;
+        }
+        p->next = newNode;
+    }
 }
 
-void insertionsort(node*& head)
-{
-	if (!head || !(head->next))
-	{
-		return;
-	}
-	node* dum = new node;
-	dum->next = NULL;
-	while (head)
-	{
-		node* cur = dum->next;
-		node* pre = dum;
-		while (cur && head->data > cur->data)
-		{
-			pre = cur;
-			cur = cur->next;
-		}
-		pre->next = head; head = head->next;
-		pre->next->next = cur;
-	}
-	head = dum->next;
-	delete dum;
+Node* findNodeByPosition(Node* head, int position) {
+    if (!head || position <= 0) return nullptr;
+    Node* p = head;
+    for (int i = 1; i < position && p; ++i) {
+        p = p->next;
+    }
+    return p;
 }
 
-void print(node* phead)
-{
-	while (phead != NULL)
-	{
-		cout << phead->data<<' ';
-		phead = phead->next;
-	}
-	cout << '\n';
+void eraseNode(Node*& head, int position) {
+    if (!head || position <= 0) return;
+    if (position == 1) {
+        Node* temp = head;
+        head = head->next;
+        if (head) {
+            head->prev = nullptr;
+        }
+        delete temp;
+        return;
+    }
+    Node* p = head;
+    for (int i = 1; i < position - 1 && p; ++i) {
+        p = p->next;
+    }
+    if (p && p->next) {
+        Node* temp = p->next;
+        p->next = temp->next;
+        if (temp->next) {
+            temp->next->prev = p;
+        }
+        delete temp;
+    }
 }
 
-int main()
-{
-	node* head=new node;
-	head->data = 1;
-	head->next = NULL;
-	head->pre = NULL;
-	tail = head;
-	
-	
+void insertionSort(Node*& head) {
+    if (!head || !head->next) return;
+    Node* dummy = new Node{ 0, head, nullptr };
+    Node* current = head;
+    while (current) {
+        Node* next = current->next;
+        Node* prev = dummy;
+        Node* pos = dummy->next;
+        while (pos && current->data > pos->data) {
+            prev = pos;
+            pos = pos->next;
+        }
+        prev->next = current;
+        current->next = pos;
+        if (pos) {
+            pos->prev = current;
+        }
+        current->prev = prev;
+        current = next;
+    }
+    head = dummy->next;
+    head->prev = nullptr;
+    delete dummy;
+}
+
+void printList(Node* head) {
+    Node* p = head;
+    while (p) {
+        cout << p->data << ' ';
+        p = p->next;
+    }
+    cout << '\n';
+}
+
+void clearList(Node*& head) {
+    Node* p = head;
+    while (p) {
+        Node* temp = p;
+        p = p->next;
+        delete temp;
+    }
+    head = nullptr;
+}
+
+int main() {
+    // Node* head = nullptr;
+    // pushBack(head);
+    // pushBack(head);
+    // pushBack(head);
+    // printList(head);
+    // insertNodeBack(head, 2, 100);
+    // printList(head);
+    // eraseNode(head, 2);
+    // printList(head);
+    // insertionSort(head);
+    // printList(head);
+    // clearList(head);
+    // return 0;
 }
