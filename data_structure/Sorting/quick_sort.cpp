@@ -30,7 +30,7 @@ int medianOfThree(int arr[], int left, int right) {
     return arr[right - 1];
 }
 
-// 快速排序的分区函数
+//快速排序的分区函数
 int partition(int arr[], int left, int right) {
     int pivot = medianOfThree(arr, left, right);
     int i = left, j = right - 1;
@@ -58,3 +58,31 @@ void quickSort(int arr[], int left, int right) {
     quickSort(arr, left, pivotIndex - 1);
     quickSort(arr, pivotIndex + 1, right);
 }
+
+/*
+template <typename E, typename Comp>
+void quickSort(E A[], int i, int j) {
+    if (j <= i) return; 
+ 
+    int pivotindex = findpivot(A, i, j); 
+    swap(A, pivotindex, j);  
+
+    int k = partition<E,Comp>(A, i, j-1, A[j]);
+    swap(A, k, j);   // Put pivot in place
+
+    quickSort<E,Comp>(A, i, k-1); 
+    quickSort<E,Comp>(A, k+1, j);
+}
+template <typename E, typename Comp>
+int partition(E A[], int l, int r, E& pivot) {
+  do {
+     while (Comp::prior(A[++l], pivot));
+     while ((l<r) && Comp::prior(A[--r],pivot));
+    
+     swap(A, l, r); 
+  } while (l < r); 
+  swap(A, l, r);   [最后一次交换是多余的]
+  return l; 
+}
+
+*/

@@ -75,7 +75,7 @@ treenode*deletenode(treenode*&root,int data){ //删除key节点
     return root;
 }
 
-/*(void remove(treenode*&root,int data){
+/*void remove(treenode*&root,int data){
     if(!root)return;
     if(data<root->data)remove(root->left,data);
     else if(data>root->data)remove(root->right,data);

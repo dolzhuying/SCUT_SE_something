@@ -1,18 +1,21 @@
 #include<bits/stdc++.h>
 
-//小根堆
+//小根堆，降序
 void adjustdown(std::vector<int>&arr,int n,int root){
     int parent=root;
+    int tmp=arr[parent];
     int child=parent*2+1;
-    while(child<n){
-        if(child+1<n&&arr[child+1]>arr[child]){
-            child++;
+    for(;parent*2+1<n;parent=child){
+        child=parent*2+1;
+        if(child+1<n&&arr[child]>arr[child+1]){
+            ++child;
         }
-        if(arr[parent]>arr[child])break;
-        std::swap(arr[parent],arr[child]);
-        parent=child;
-        child=child*2+1;
+        if(arr[child]<tmp){
+            arr[parent]=arr[child];
+        }
+        else break;
     }
+    arr[parent]=tmp;
 }
 
 void heap_sort(std::vector<int>&arr){

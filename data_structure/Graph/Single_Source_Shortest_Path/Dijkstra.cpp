@@ -11,7 +11,7 @@ struct cmp{//堆优化比较器
 
 void dijkstra_heap(const std::vector<std::vector<edge>>&graph,int start,std::vector<int>&dis){
     int n=graph.size();
-    std::vector<bool>vis(n,false);//初始化为未访问
+    // std::vector<bool>vis(n,false);//初始化为未访问
     dis.assign(n,INT_MAX);//所有点距离初始化为max
     dis[start]=0;
     
@@ -22,12 +22,13 @@ void dijkstra_heap(const std::vector<std::vector<edge>>&graph,int start,std::vec
         int curdis=pq.top().second;
         pq.pop();
 
-        vis[curnode]=1;//标记访问
+        // vis[curnode]=1;//标记访问
+        if(curdis<dis[curnode])continue;//堆中可能存在两个相同顶点的距离，但dis数组是时刻保持最优
         for(auto& e:graph[curnode]){
             int nextnode=e.to;
             int nextdis=e.val;
 
-            if(!vis[nextnode]&&dis[nextnode]>curdis+nextdis){//未访问且满足更优路径，进队
+            if(dis[nextnode]>curdis+nextdis){//未访问且满足更优路径，进队
                 dis[nextnode]=curdis+nextdis;
                 pq.push({nextnode,dis[nextnode]});
 

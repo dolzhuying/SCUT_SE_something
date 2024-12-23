@@ -12,13 +12,13 @@ struct Node {
 
 // 节点的高度
 int height(Node *&N) {
-    return N==nullptr?0:N->height;
+    return N==nullptr?-1:N->height;
 }
 
 // 节点的平衡因子
 int getBalanceFactor(Node *&N) {
     if (N == nullptr)
-        return 0;
+        return -1;
     return height(N->left) - height(N->right);
 }
 
@@ -54,6 +54,40 @@ void leftRotate(Node *&x) {
 
     x=y;
 }
+
+//ppt
+/*
+void balance( AvlNode * & t ){
+    if( t == nullptr )  return;
+    if( height(t->left) - height(t->right) > IMBALANCE )
+       if( height( t->left->left ) >= height( t->left->right ) )
+           rotateWithLeftChild( t );
+       else
+          doubleWithLeftChild( t );
+   else
+   if( height( t->right ) - height( t->left ) > IMBALANCE )
+       if( height( t->right->right ) >= height( t->right->left ) )
+           rotateWithRightChild( t );
+       else
+          doubleWithRightChild( t );
+  t->height = max( height( t->left ), height( t->right ) ) + 1;
+}
+
+void rotateWithLeftChild( AvlNode * & k2 ){                  右旋（有左孩子）
+    AvlNode *k1 = k2->left;
+    k2->left = k1->right;
+    k1->right = k2;
+    k2->height = max( height( k2->left ), height( k2->right ) ) + 1;
+    k1->height = max( height( k1->left ), k2->height ) + 1;
+    k2 = k1;
+}
+
+void doubleWithLeftChild( AvlNode * & k3 ) {
+    rotateWithRightChild( k3->left );
+    rotateWithLeftChild( k3 );
+}
+
+*/
 
 void insert(Node*&root,int data){
     if(!root){
@@ -94,7 +128,7 @@ void insert(Node*&root,int data){
 // 最小值节点
 Node* getMinValueNode(Node *&node) {
     Node *current = node;
-    while (current && current->left != nullptr)
+    while (current->left != nullptr)
         current = current->left;
     return current;
 }

@@ -25,7 +25,7 @@ void unionset(std::vector<int>&par,std::vector<int>&rank,int i,int j){
     }
 }
 
-std::vector<std::vector<int>> krustra(const std::vector<std::vector<int>>&edges,int N){
+std::vector<std::vector<int>> krustra(std::vector<std::vector<int>>&edges,int N){
     std::sort(edges.begin(),edges.end(),cmp);//按边权从小到大，依次取出直到生成mst
     std::vector<std::vector<int>>mst;
     std::vector<int>par(N),rank(N);//祖宗节点和树的秩
@@ -43,3 +43,30 @@ std::vector<std::vector<int>> krustra(const std::vector<std::vector<int>>&edges,
     }
     return mst;
 }
+
+//ppt
+/*
+vector<Edge> kruskal( vector<Edge> edges, int numVertices )
+{
+    DisjSets ds{ numVertices };
+    priority_queue pq{ edges };
+    vector<Edge> mst;
+
+    while( mst.size( ) != numVertices - 1 ){
+        Edge e = pq.pop( ); // Edge e = (u, v)
+        SetType uset = ds.find( e.getu( ) );
+        SetType vset = ds.find( e.getv( ) );
+        
+        if( uset != vset ){
+            // Accept the edge
+            mst.push_back( e );
+            ds.union( uset, vset );
+        }
+    }
+    return mst;
+}
+
+*/
+
+
+

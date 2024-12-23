@@ -30,7 +30,6 @@ public:
         if (isEmpty()) {
             return ;  // 队列为空
         }
-        int value = arr[front];
         front = (front + 1) % capacity;
     }
 
@@ -58,5 +57,10 @@ public:
     // 判断队列是否已满
     bool isFull() const {
         return front == (rear + 2) % capacity;
+    }
+
+    //长度
+    int size() const{
+        return (rear+capacity-front+1)%capacity;
     }
 };
